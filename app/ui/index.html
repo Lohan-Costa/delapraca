@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>De Lá Pra Cá</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<header class="cabecalho">
+  <svg class="marca" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M3 6a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+    <path d="M21 11v-3a2 2 0 0 0 -2 -2h-6l3 3m0 -6l-3 3" />
+    <path d="M3 13v3a2 2 0 0 0 2 2h6l-3 -3m0 6l3 -3" />
+    <path d="M15 18a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+  </svg>
+  <div class="titulos">
+    <h1>De Lá Pra Cá</h1>
+    <p class="sub" id="sub">serviço do Media Composer</p>
+  </div>
+</header>
+
+<section class="versao-nova" id="versaoNova" hidden>
+  <span>Versão nova: <strong id="versaoNovaNumero"></strong></span>
+  <button id="btnBaixar" class="primario">Baixar</button>
+</section>
+<section class="estado" id="cartao">
+  <span class="ponto" id="ponto"></span>
+  <div class="estado-txt">
+    <strong id="estadoTitulo">verificando…</strong>
+    <span class="detalhe" id="estadoDetalhe">&nbsp;</span>
+  </div>
+</section>
+
+<p class="msg" id="msg"></p>
+
+<section class="acoes">
+  <button id="btnRevisar" class="secundario">
+    Revisar mídias
+  </button>
+  <button id="btnLiberar" class="secundario">
+    Liberar a porta do Media Composer
+  </button>
+  <button id="btnConfig" class="secundario">
+    ⚙ Configurações
+  </button>
+  <p class="ajuda">
+    Use se o painel não aparecer no menu <em>Tools</em> do Avid. Feche o Media Composer
+    antes — ele deixa um processo segurando as portas ao sair.
+  </p>
+</section>
+
+<footer class="rodape">
+  <span class="assinatura">
+    Idealizado por <button class="link" id="autor">Lohan Costa, edt.</button>
+    Desenvolvido com Claude Code.
+  </span>
+  <button id="btnEncerrar" class="perigo">Encerrar</button>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

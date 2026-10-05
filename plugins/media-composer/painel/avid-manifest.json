@@ -1,0 +1,45 @@
+{
+  "category": "suite-plugin",
+  "name": "com.ciclomedia.delapraca.mc",
+  "version": "0.1.79",
+  "displayName": "De Lá Pra Cá",
+  "description": "Relinka a timeline para a mídia original, sem sair do Media Composer.",
+  "usesApi": [
+    "avid.mediacomposer.general",
+    "avid.mediacomposer.command"
+  ],
+  "subscribesToChannels": [],
+  "entitlements": [],
+  "companyPrefix": "ciclomedia",
+  "appShortName": "delapraca.mc",
+  "uiItems": [
+    {
+      "type": "dropdown",
+      "menuName": "Tools",
+      "id": "delapraca",
+      "displayText": "De Lá Pra Cá",
+      "windowTitle": "De Lá Pra Cá",
+      "icon": "static/icone.svg",
+      "url": "static/loader.html"
+    }
+  ],
+  "windowSize": {
+    "initial": {
+      "width": "400",
+      "height": "560"
+    },
+    "minimum": {
+      "width": "320",
+      "height": "300"
+    }
+  },
+  "targetHosts": [
+    "MediaComposer"
+  ],
+  "allowedDomains": [
+    "localhost:7823",
+    "127.0.0.1:7823"
+  ],
+  "windowStyle": "floating",
+  "singleton": true
+}

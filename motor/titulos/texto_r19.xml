@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Sm2TiGenerator DbId="60fddb4c-89a5-48c8-8d80-3fbe225c6227">
+
+       <FieldsBlob>0000000200000029800a131a08080110eabfa6eb011a07080410eebbd744121100000024789c6366606420040000b20005</FieldsBlob>
+
+       <PrettyType>Rich</PrettyType>
+
+       <Name>Rich</Name>
+
+       <Start>86400</Start>
+
+       <Duration>120</Duration>
+
+       <LinkedItemSync/>
+
+       <WasDisbanded>false</WasDisbanded>
+
+       <MarkersBA/>
+
+       <UiMemento>0</UiMemento>
+
+       <Flags>0</Flags>
+
+       <PriorityIndex>0</PriorityIndex>
+
+       <EffectFiltersBA>00000002000000b08128b52ffd603d002d0500c28a212b804b3307cb10195154134142fb5fc3f60e5495fd26701a7ef487e1a392699d30d66384fdfd2389546a4252092d82a016e05a0f8c2359f1e224963a71b232fb2efde072791a8ed928884c2120140d2e90c1791fafa4cc5ea9949216213e7085a6c36bc3978ab08a3dfad45938f3f667c4acc4dd1e00b7581e86cb909ed67058ad04556b3a5c0b008000b047ccad738bc046ceb8a0e00c263880c109b9581c23a828</EffectFiltersBA>
+
+       <ImportExportMetadataBA/>
+
+       <RenderTextEnabled>true</RenderTextEnabled>
+
+       <RenderTextGanged>true</RenderTextGanged>
+
+       <RenderTextPrefixed>true</RenderTextPrefixed>
+
+       <In/>
+
+      </Sm2TiGenerator>

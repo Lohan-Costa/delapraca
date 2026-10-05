@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'">
+<title>De Lá Pra Cá</title>
+<style>  html, body { margin:0; height:100%; }
+  body { background:#2b2b2b; color:#e2e2e2; font:13px/1.45 "Segoe UI", -apple-system, sans-serif;
+         display:flex; align-items:center; justify-content:center; padding:0 24px; box-sizing:border-box; }
+  .caixa { max-width:320px; }
+  h1 { font-size:15px; margin:0 0 6px; }
+  p { margin:0; color:#a8a8a8; }
+  .forte { color:#e2e2e2; font-weight:600; margin-bottom:6px; }
+  button { margin-top:14px; background:#4a7fd4; border:1px solid #4a7fd4; color:#fff; border-radius:6px;
+           padding:7px 14px; font:inherit; cursor:pointer; }
+  button:disabled { opacity:.6; cursor:default; }
+  .nota { margin-top:10px; font-size:11px; color:#8a8a8a; }
+</style>
+</head>
+<body>
+<div class="caixa">
+  <h1>De Lá Pra Cá</h1>
+  <p id="forte" class="forte" hidden>Serviço não encontrado.</p>
+  <p id="texto">procurando o De Lá Pra Cá…</p>
+  <button id="abrir" hidden>Abrir o De Lá Pra Cá</button>
+  <p id="nota" class="nota"></p>
+</div>
+<script>  var q = new URLSearchParams(location.search);
+  if (q.get("estado") === "fora") {
+    document.getElementById("forte").hidden = false;
+    document.getElementById("texto").textContent =
+      "Abra o aplicativo De Lá Pra Cá. Esta janela conecta sozinha quando ele abrir — não precisa fechar nada.";
+    var b = document.getElementById("abrir");
+    b.hidden = !(q.get("app") && window.delapraca && typeof window.delapraca.abrirApp === "function");
+    b.onclick = function () {
+      b.disabled = true;
+      window.delapraca.abrirApp().then(function (r) {
+        document.getElementById("nota").textContent = r && r.ok
+          ? "Abrindo o aplicativo… esta janela conecta sozinha em seguida."
+          : (r && r.erro) || "não consegui abrir o aplicativo";
+        if (!(r && r.ok)) b.disabled = false;
+      });
+    };
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "bundle": {
+    "resources": {
+      "motor/": "motor/"
+    },
+    "windows": {
+      "nsis": {
+        "installMode": "currentUser",
+        "languages": ["PortugueseBR"]
+      }
+    }
+  }
+}
