@@ -1,0 +1,58 @@
+{
+  "24_3ch_c1": {
+    "template_master": "AVB_AUDIO_1_24BIT_3CH.WAV",
+    "bits": 24,
+    "channels": 3,
+    "coding_format": 1,
+    "block_align": 9,
+    "example_path": "/AVB_TEMPLATES/avb_audio_1_24bit_3ch.wav"
+  },
+  "24_5ch_c1": {
+    "template_master": "AVB_AUDIO_1_24BIT_5CH.WAV",
+    "bits": 24,
+    "channels": 5,
+    "coding_format": 1,
+    "block_align": 15,
+    "example_path": "/AVB_TEMPLATES/avb_audio_1_24bit_5ch.wav"
+  },
+  "32_3ch_c10": {
+    "template_master": "AVB_AUDIO_10_32BIT_3CH.WAV",
+    "bits": 32,
+    "channels": 3,
+    "coding_format": 10,
+    "block_align": 12,
+    "example_path": "/AVB_TEMPLATES/avb_audio_10_32bit_3ch.wav"
+  },
+  "32_4ch_c10": {
+    "template_master": "AVB_AUDIO_10_32BIT_4CH.WAV",
+    "bits": 32,
+    "channels": 4,
+    "coding_format": 10,
+    "block_align": 16,
+    "example_path": "/AVB_TEMPLATES/avb_audio_10_32bit_4ch.wav"
+  },
+  "16_1ch_c1": {
+    "template_master": "AVB_AUDIO_1_16BIT_1CH.WAV",
+    "bits": 16,
+    "channels": 1,
+    "coding_format": 1,
+    "block_align": 2,
+    "example_path": "/AVB_TEMPLATES/avb_audio_1_16bit_1ch.wav"
+  },
+  "24_2ch_c1": {
+    "template_master": "AVB_AUDIO_1_24BIT_2CH.WAV",
+    "bits": 24,
+    "channels": 2,
+    "coding_format": 1,
+    "block_align": 6,
+    "example_path": "/AVB_TEMPLATES/avb_audio_1_24bit_2ch.wav"
+  },
+  "32_5ch_c10": {
+    "template_master": "AVB_AUDIO_10_32BIT_5CH.WAV",
+    "bits": 32,
+    "channels": 5,
+    "coding_format": 10,
+    "block_align": 20,
+    "example_path": "/AVB_TEMPLATES/avb_audio_10_32bit_5ch.wav"
+  }
+}

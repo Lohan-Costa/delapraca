@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>De Lá Pra Cá</title>
+<link rel="stylesheet" href="/static/painel.css">
+</head>
+<body>
+
+<div class="head">
+  <div class="marca">
+    <h1>De Lá Pra Cá</h1>
+    <p class="sub">Idealizado por
+      <button class="autor" id="autor" type="button"
+              title="Abrir o LinkedIn de Lohan Costa">Lohan Costa, edt.</button>
+      Desenvolvido com Claude Code.
+    </p>
+  </div>
+  <span class="conn" id="conn"><span class="ponto"></span><span id="connTexto">verificando…</span></span>
+</div>
+
+<div id="prontidao" class="bloco prontidao">
+  <p class="bloco-titulo" id="prTitulo">procurando o De Lá Pra Cá…</p>
+  <p id="prTexto"></p>
+  <div id="prItens"></div>
+  <div class="acoes">
+    <button id="prAbrirApp" class="primary" hidden>Abrir o De Lá Pra Cá</button>
+    <button id="prConferir" class="sm ghost">Conferir de novo</button>
+  </div>
+</div>
+
+<p class="aviso" id="avisoPlugin" hidden></p>
+
+<nav class="tabs" role="tablist">
+  <button id="tabDeLaPraCa" class="on" role="tab">De Lá Pra Cá</button>
+  <button id="tabDaquiPraLa" role="tab">Daqui Pra Lá</button>
+  <button id="tabAjustes" class="engrenagem" role="tab" title="Ajustes" aria-label="Ajustes">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+         stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+      <circle cx="12" cy="12" r="3"/>
+    </svg>
+  </button>
+</nav>
+
+<section id="paneDeLaPraCa" class="on" role="tabpanel">
+
+  <div class="passo" id="passoOrigem">
+    <div class="bloco" data-solta="timeline">
+      <p class="bloco-titulo">1 · a timeline</p>
+      <div class="seg" id="modoOrigem">
+        <button data-modo="mc" class="on" data-so="mc">do Media Composer</button>
+        <button data-modo="nle" disabled data-so="resolve">do Resolve <span class="em-breve">em breve</span></button>
+        <button data-modo="aaf">Importar timeline</button>
+        <button data-modo="atualizar" data-so="resolve">Atualizar timeline</button>
+      </div>
+
+      <div id="origemMC">
+        <div id="alvoTimeline" class="alvo-drop">
+          <p class="dica" id="dicaSeq"><strong>Arraste a timeline da bin</strong> para cá.</p>
+          <p class="escolhido" id="timelineEscolhida" hidden></p>
+        </div>
+      </div>
+
+      <div id="origemAAF" hidden>
+        <p class="sub-titulo">arquivo</p>
+        <div data-so="mc">
+          <div class="linha">
+            <input type="text" id="campoAaf" placeholder="nenhum arquivo escolhido" spellcheck="false">
+            <button id="btnEscolherAaf" class="sm">Escolher…</button>
+          </div>
+          <p class="dica">O AAF que você recebeu. Poupa o export — é o caso comum.
+             Também pode ser <strong>arrastado do Explorer</strong> para este bloco.
+             Carta, bin, XML, DRT, PRPROJ e OTIO: em breve.</p>
+        </div>
+        <div data-so="resolve">
+          <div class="linha">
+            <span class="caminho" id="rcArquivo"><bdi>nenhum arquivo escolhido</bdi></span>
+            <button id="rcBtnAbrir" class="sm">Escolher…</button>
+          </div>
+          <p class="dica">Uma Carta Aberta (.json), uma bin do Avid (.avb), um AAF ou um projeto
+             do Premiere (.prproj). XML, DRT e OTIO: em breve.</p>
+          <div id="rcAvulso" hidden>
+            <p class="sub-titulo" id="rcAvulsoTitulo">sequências da bin</p>
+            <div class="lista rc-lista" id="rcSequencias"></div>
+          </div>
+        </div>
+
+        <p class="ml-sep">Magic Link</p>
+        <div id="mlReceber">
+          <div class="linha ml-barra">
+            <select id="mlFiltro" aria-label="o que mostrar"></select>
+            <button id="mlBtnProcurar" class="sm">Procurar novos</button>
+          </div>
+          <div class="tabela-envios">
+            <table id="mlTabela">
+              <colgroup id="mlColunas"></colgroup>
+              <thead><tr id="mlCabecalho"></tr></thead>
+              <tbody id="mlCorpo"></tbody>
+            </table>
+          </div>
+          <p class="dica" id="mlDicaReceber"></p>
+        </div>
+      </div>
+
+      <div id="origemAtualizar" data-so="resolve" hidden>
+        <label class="at-campo" for="atTrabalho">timeline de trabalho
+          <select id="atTrabalho"></select></label>
+        <div class="at-campo">versão antiga <span class="leve">(de onde a timeline de trabalho veio)</span>
+          <div class="linha"><select id="atAntiga"></select><button id="atBtnAntiga" class="sm">Escolher…</button></div></div>
+        <div class="at-campo">versão nova
+          <div class="linha"><select id="atNova"></select><button id="atBtnNova" class="sm">Escolher…</button></div></div>
+        <p class="dica">As duas no mesmo formato: AAF com AAF, ou Carta Aberta (.json) e bin do Avid (.avb), que valem uma pela outra.</p>
+        <div class="acoes"><button id="atComparar" class="sm primary">Comparar</button></div>
+      </div>
+
+      <div data-so="resolve" id="rcSinais" hidden>
+        <label class="chk">
+          <input type="checkbox" id="rcMarcar" checked>
+          <span>marcar na timeline o que pede atenção<em>um marcador no início de cada
+            segmento, com a nota e a palavra-chave DLPC</em></span>
+        </label>
+        <label class="chk">
+          <input type="checkbox" id="rcColorir" checked>
+          <span>colorir esses segmentos<em id="rcLegenda">cor local (só o segmento, nunca o clipe na bin):
+            Pink = possível distorção (Stretch), Chocolate = refazer, Yellow = conferir</em></span>
+        </label>
+        <label class="chk">
+          <input type="checkbox" id="rcNotas">
+          <span>criar a trilha de notas<em>um texto acima de tudo explicando cada efeito e seus
+            valores; os clipes vão desligados e não saem no render</em></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="bloco" id="rcTrazendo" data-so="resolve" hidden>
+      <div class="alerta-espera" id="rcAlerta" role="alert" hidden>
+        <span class="alerta-ic" aria-hidden="true">!</span>
+        <span><b>Não mexa no Resolve até terminar</b>
+          <span id="rcAlertaTexto">O De Lá Pra Cá está usando o Resolve. Mexer agora pode cair na timeline errada.</span></span>
+      </div>
+      <p class="bloco-titulo" id="rcTrazendoTitulo">Importando</p>
+      <div class="linha prog-linha"><span id="rcEtapa">—</span><span id="rcEtapaN"></span></div>
+      <div class="barra" id="rcBarraFundo"><div class="barra-preenche" id="rcBarra"></div></div>
+      <div class="linha prog-linha"><span id="rcConta"></span><span id="rcTempo"></span></div>
+      <div class="prog-atual" id="rcAtual" aria-live="polite">
+        <span class="prog-atual-o-que" id="rcAtualOQue"></span>
+        <span class="prog-atual-nome" id="rcAtualNome"></span>
+        <span class="prog-atual-pasta" id="rcAtualPasta"></span>
+      </div>
+      <div class="acoes"><button id="rcBtnCancelar" class="ghost sm">Cancelar</button></div>
+    </div>
+    <div class="bloco" id="rcPrproj" data-so="resolve" hidden>
+      <p class="bloco-titulo" id="rcPrprojTitulo">antes de montar</p>
+      <div class="placar" id="rcPrprojPlacar"></div>
+      <div class="lista rc-lista" id="rcPrprojLinhas"></div>
+      <p class="sub-titulo">vídeo de referência</p>
+      <div class="linha">
+        <span class="caminho" id="rcRefNome"><bdi>nenhuma</bdi></span>
+        <button id="rcRefEscolher" class="sm">Escolher…</button>
+        <button id="rcRefTirar" class="sm ghost" hidden>Tirar</button>
+      </div>
+      <div class="seg" id="rcRefSom" hidden>
+        <button data-som="A" class="on" title="O som da referência numa trilha nova abaixo de todo o áudio, com solo">som em trilha nova</button>
+        <button data-som="B" title="Nenhum áudio da timeline: só o som da referência (o colorista não trabalha com áudio)">só o som dela</button>
+        <button data-som="nenhum">sem o som</button>
+      </div>
+      <label class="chk">
+        <input type="checkbox" id="rcPrprojAudio" checked>
+        <span>trazer o áudio <em id="rcPrprojAudioInfo"></em></span>
+      </label>
+      <label class="chk" id="rcPrprojCompoundLinha" hidden>
+        <input type="checkbox" id="rcPrprojCompound" checked>
+        <span>nest do Premiere como Compound Clip <em id="rcPrprojCompoundInfo"></em><em>desmarcado: o nest
+          entra aberto em trilhas (o que algumas casas de cor pedem)</em></span>
+      </label>
+      <label class="chk" id="rcPrprojConferirLinha" hidden>
+        <input type="checkbox" id="rcPrprojConferir">
+        <span>conferir pela referência ao terminar <em id="rcPrprojConferirInfo"></em><em>exporta o 1º e o
+          último quadro visível de cada plano e compara com o vídeo de referência; dá para cancelar</em></span>
+      </label>
+      <details class="avancado" id="rcPrprojFaltam" hidden>
+        <summary id="rcPrprojFaltamTitulo">no proxy</summary>
+        <div class="dica" id="rcPrprojFaltamLista"></div>
+      </details>
+      <div class="acoes">
+        <button id="rcPrprojCancelar" class="ghost sm">Cancelar</button>
+        <button id="rcPrprojMontar" class="primary">Montar timeline</button>
+      </div>
+    </div>
+    <div class="bloco" id="rcFeito" data-so="resolve" hidden></div>
+
+    <div class="bloco" id="rcAtualizar" data-so="resolve" hidden>
+      <p class="bloco-titulo" id="atTitulo">Atualizar</p>
+      <p class="dica" id="atMotivo"></p>
+      <div id="atResumo"></div>
+      <label class="chk">
+        <input type="checkbox" id="atAudio">
+        <span>contar as mudanças de áudio<em>desligado: o sound design não conta como mudança de
+          montagem, e o áudio vem inteiro da versão nova</em></span>
+      </label>
+      <div class="acoes">
+        <button id="atComoNova" class="sm">Importar como nova</button>
+        <button id="atAplicar" class="sm primary" disabled
+                title="a sua timeline vai para o Backup e a atualizada fica no lugar dela">Atualizar</button>
+      </div>
+      <p class="dica" id="atBackup"></p>
+      <div class="acoes"><button id="atFechar" class="sm">Fechar</button></div>
+    </div>
+
+    <div class="bloco" data-solta="midia">
+      <p class="bloco-titulo">2 · onde estão os originais
+        <span class="leve" id="pastasOpcional" hidden>(opcional — o banco sabe)</span><span class="leve" data-so="resolve">(opcional)</span></p>
+      <p class="dica" data-so="resolve">Com a pasta, a timeline entra nos <strong>originais em alta</strong>.
+         Sem ela, na mídia do Avid ou offline.</p>
+      <div id="listaPastas" class="lista-pastas"></div>
+      <div class="linha">
+        <button id="btnEscolherPasta" class="sm"
+                title="Escolha uma ou várias pastas. Também dá para arrastá-las do Explorer para este bloco. As subpastas entram junto — aponte a raiz da diária. A lista acumula.">Escolher…</button>
+      </div>
+
+    </div>
+
+    <div id="soRelink" data-so="mc">
+    <div class="bloco">
+      <p class="bloco-titulo">3 · banco de mídia <span class="leve">(opcional)</span></p>
+
+      <div id="bancoDesligado">
+        <p class="dica">Lembra o que já foi confirmado e acelera os próximos relinks.
+           O ganho aparece do segundo em diante — o primeiro é quem o alimenta.</p>
+        <div class="linha">
+          <button id="btnCriarBanco" class="sm"
+                  title="Cria um banco novo: você dá o nome e escolhe onde ele fica, na janela do Windows.">Criar</button>
+          <button id="btnConectarBanco" class="sm"
+                  title="Aponta para o banco.json de um banco que já existe — o seu ou o de outra pessoa da produção.">Conectar</button>
+        </div>
+        <p class="dica aviso-leve" id="bancoAviso" hidden></p>
+      </div>
+
+      <div id="bancoLigado" hidden>
+        <div class="linha">
+          <span class="banco-nome" id="bancoNome"></span>
+          <button id="btnDesconectarBanco" class="x"
+                  title="Desconecta este projeto do banco. Não apaga o banco.">✕</button>
+        </div>
+        <p class="dica" id="bancoResumo"></p>
+      </div>
+    </div>
+
+    <details class="avancado">
+      <summary>opções avançadas</summary>
+      <div class="avancado-corpo">
+        <label class="chk">
+          <input type="checkbox" id="optSubclipes" checked>
+          <span>desfazer subclipes<em>entrega os clipes originais na timeline</em></span>
+        </label>
+        <label class="chk">
+          <input type="checkbox" id="optGrupos" checked>
+          <span>desfazer group clips<em>troca cada multicam pela câmera selecionada</em></span>
+        </label>
+
+        <div class="campo" id="campoPreset">
+          <span>preset de export</span>
+          <div class="linha">
+            <span class="estado-preset" id="estadoPreset">verificando…</span>
+            <button id="btnInstalarPreset" class="sm" hidden>Instalar</button>
+          </div>
+          <em>o plugin usa um preset próprio, de AAF puro. Não é escolha:
+              o formato do export é requisito, e um preset errado faz o Media
+              Composer renderizar a timeline inteira.</em>
+          <p class="aviso" id="avisoPreset" hidden></p>
+        </div>
+
+        <p class="aviso" id="notaRotaAvb" hidden>
+          esta timeline foi lida direto da bin — sem export, sem preset e sem import.
+        </p>
+      </div>
+    </details>
+
+    <div class="filtros-relink" id="filtrosRelink">
+      <label class="chk lado-a-lado">
+        <input type="checkbox" id="optSoImportados">
+        <span>só importados<em>deixa de fora o que já está AMA-linkado</em></span>
+      </label>
+      <label class="chk lado-a-lado">
+        <input type="checkbox" id="optSoOffline">
+        <span>só offline<em>deixa de fora o que já está online</em></span>
+      </label>
+    </div>
+
+    <div class="acoes">
+      <button id="btnPreparar" class="primary">Relinkar Sequência</button>
+    </div>
+    </div>
+  </div>
+
+  <div class="passo" id="passoRevisao" hidden>
+    <div class="placar" id="placar"></div>
+
+    <section class="convite" id="conviteRevisao">
+      <p class="convite-resumo" id="resumoRevisao"></p>
+      <button id="btnJanelaRevisao">Revisar mídias</button>
+      <p class="convite-nota" id="notaRevisao"></p>
+      <span class="leve" id="avisoJanelaRevisao" hidden></span>
+    </section>
+
+    <div class="linha filtros">
+      <div class="seg" id="filtro">
+        <button data-filtro="revisao" class="on">a decidir</button>
+        <button data-filtro="tudo">tudo</button>
+      </div>
+      <button id="btnVoltar" class="sm ghost">refazer</button>
+      <button id="btnConcluirRevisao" class="primary sm" hidden>Concluir revisão</button>
+    </div>
+
+    <div id="listaMasters" class="lista"></div>
+
+    <div class="campo" id="campoNomeBin" data-so="mc">
+      <label for="nomeBin">nome da bin <span class="leve">(opcional)</span></label>
+      <input type="text" id="nomeBin" placeholder="nome do projeto, numerado"
+             spellcheck="false" maxlength="60" autocomplete="off">
+      <em>em branco usa o nome do projeto. Se já existir uma bin com o nome, entra
+          como “nome 2”, “nome 3”…</em>
+    </div>
+
+    <div class="acoes">
+      <button id="btnAplicar" class="primary">Relinkar no Media Composer</button>
+    </div>
+  </div>
+
+  <div class="passo" id="passoProgresso" hidden>
+    <div class="bloco">
+      <p class="bloco-titulo" id="progEtapa">trabalhando</p>
+      <div class="barra"><div class="barra-preenche" id="progBarra"></div></div>
+      <div class="linha prog-linha">
+        <span id="progPct">0%</span>
+        <span class="caminho" id="progDetalhe"></span>
+        <span id="progTempo"></span>
+      </div>
+      <p class="aviso" id="avisoTrabalho" hidden></p>
+    </div>
+    <div class="acoes">
+      <button id="btnCancelar" class="ghost">Abortar</button>
+    </div>
+  </div>
+
+  <div class="passo" id="passoFeito" data-so="mc" hidden>
+    <div class="bloco">
+      <p class="bloco-titulo">pronto</p>
+      <div id="resumoFinal"></div>
+    </div>
+    <div class="acoes">
+      <button id="btnNovo" class="primary">Novo relink</button>
+    </div>
+  </div>
+</section>
+
+<section id="paneDaquiPraLa" role="tabpanel">
+
+  <div class="bloco" data-so="resolve">
+    <p class="bloco-titulo">Daqui Pra Lá <span class="em-breve">em breve</span></p>
+    <p class="dica">Enviar do Resolve — a timeline ou um insert de volta para a edição, pelo
+       Magic Link, ou exportado para um arquivo — chega numa próxima etapa.</p>
+  </div>
+
+  <div data-so="mc">
+  <div class="seg" id="exModo" role="tablist">
+    <button type="button" data-modo="timeline" class="on">Timeline completa</button>
+    <button type="button" data-modo="insert">Insert</button>
+  </div>
+
+  <div id="exModoInsert" hidden>
+    <div class="bloco">
+      <p class="bloco-titulo">1 · clipes do insert</p>
+      <div class="acoes"><button id="insBtnColetar" class="primary">Coletar seleção</button></div>
+      <p class="dica">Selecione na timeline e aperte Coletar. Para clipes separados, colete um
+         de cada vez — o Avid leva junto o que estiver entre eles.</p>
+      <div class="bloco" id="insConfirmar" hidden>
+        <p class="aviso" id="insConfirmarTexto"></p>
+        <div class="acoes">
+          <button id="insBtnOk" class="primary sm">OK</button>
+          <button id="insBtnCancelarColeta" class="ghost sm">Cancelar</button>
+        </div>
+      </div>
+      <div class="lista" id="insLista"></div>
+      <p class="dica" id="insVazia">nenhum clipe coletado</p>
+      <div class="linha">
+        <span class="dica" id="insResumo"></span>
+        <button id="insBtnLimpar" class="ghost sm" hidden>Limpar lista</button>
+      </div>
+      <label class="dica"><input type="checkbox" id="insSoVideo"> só vídeo (sem o som linkado)</label>
+    </div>
+
+    <div class="bloco">
+      <p class="bloco-titulo">2 · nome <span class="leve">(é o nome da timeline do outro lado)</span></p>
+      <input type="text" id="insNome" spellcheck="false" autocomplete="off" value="%{sequencia}">
+      <div class="chips" id="insCampos"></div>
+      <div class="chips" id="insPrefixos" title="prefixos: um clique põe no começo do nome">
+        <button type="button" data-prefixo="INSERT PARA %{tipo} — ">INSERT PARA %tipo — </button>
+        <button type="button" data-prefixo="%{tipo}_">%tipo_</button>
+        <button type="button" data-prefixo="%{data}_">%data_</button>
+      </div>
+      <p class="dica" id="insPrevia"></p>
+    </div>
+
+    <div class="bloco">
+      <p class="bloco-titulo">3 · comentário <span class="leve">(opcional)</span></p>
+      <textarea id="insComentario" rows="2" spellcheck="true"
+                placeholder="o que a cor ou o VFX precisa saber"></textarea>
+    </div>
+
+    <div class="bloco">
+      <p class="bloco-titulo">Magic Link</p>
+      <div class="acoes botoes-canal" id="mlEnviarInsert"></div>
+      <p class="dica" id="mlDicaInsert"></p>
+    </div>
+    <div class="acoes">
+      <button id="insBtnExportar" disabled>Exportar…</button>
+    </div>
+    <div id="insFeito" hidden></div>
+  </div>
+
+  <div id="exModoTimeline">
+
+  <div class="bloco" data-solta="exportTimeline">
+    <p class="bloco-titulo">1 · a timeline</p>
+    <div class="alvo-drop">
+      <p class="dica" id="exDica"><strong>Arraste a timeline da bin</strong> para cá.</p>
+      <p class="escolhido" id="exSequencia" hidden></p>
+    </div>
+    <div id="exResumo" hidden></div>
+  </div>
+
+  <div class="bloco">
+    <p class="bloco-titulo">2 · formato</p>
+    <select id="exFormato">
+      <option value="carta_aberta">Carta Aberta (.json) — o nosso, legível</option>
+      <option value="drt">DaVinci Resolve (.drt)</option>
+      <option value="prproj" disabled>Premiere Pro (.prproj) — em breve</option>
+      <option value="aaf" disabled>AAF — em breve</option>
+      <option value="xml" disabled>XML — em breve</option>
+      <option value="otio" disabled>OpenTimelineIO (.otio) — em breve</option>
+    </select>
+  </div>
+
+  <div class="bloco">
+    <p class="bloco-titulo">3 · nome <span class="leve">(do arquivo, e da timeline no Magic Link)</span></p>
+    <input type="text" id="exNome" spellcheck="false" autocomplete="off"
+           placeholder="o nome da sequência entra aqui ao arrastar">
+    <div class="chips" id="exCampos"></div>
+    <p class="dica" id="exPrevia"></p>
+  </div>
+
+  <div class="bloco">
+    <p class="bloco-titulo">4 · comentário <span class="leve">(opcional)</span></p>
+    <textarea id="exComentario" rows="2" spellcheck="true"
+              placeholder="vira um marcador no início da timeline"></textarea>
+    <p class="dica" id="exNotaComentario">No DRT o marcador ainda não é escrito — o texto
+       vai junto na Carta Aberta.</p>
+  </div>
+
+  <div class="bloco" id="exProgresso" hidden>
+    <p class="bloco-titulo" id="exEtapa">trabalhando</p>
+    <div class="barra"><div class="barra-preenche" id="exBarra"></div></div>
+    <div class="linha prog-linha">
+      <span id="exPct"></span>
+      <span class="caminho" id="exDetalhe"></span>
+    </div>
+  </div>
+
+  <div class="bloco">
+    <p class="bloco-titulo">Magic Link</p>
+    <div class="acoes botoes-canal" id="mlEnviarTimeline"></div>
+    <p class="dica" id="mlDicaTimeline"></p>
+  </div>
+
+  <div class="acoes">
+    <button id="exBtnExportar" disabled>Exportar…</button>
+    <button id="exBtnCancelar" class="ghost" hidden>Abortar</button>
+  </div>
+  <div id="exFeito" hidden></div>
+  </div>
+  </div>
+</section>
+
+<section id="paneAjustes" role="tabpanel">
+  <div class="bloco">
+    <p class="bloco-titulo">Magic Link · canais</p>
+    <div class="lista" id="ajCanais"></div>
+    <p class="dica" id="ajCanaisDica"></p>
+  </div>
+  <div class="bloco" data-so="resolve">
+    <p class="bloco-titulo">Sinais do Import · código de cores</p>
+    <div id="ajCores"></div>
+    <label class="cores-palavra" for="ajPalavra">palavra-chave dos marcadores
+      <input type="text" id="ajPalavra" maxlength="32" spellcheck="false"></label>
+    <p class="dica">Os marcadores já importados ficam com a palavra antiga. Vale a partir do
+      próximo Trazer.</p>
+    <p class="aviso" id="ajCoresAviso" hidden></p>
+    <div class="acoes"><button id="btnCoresFabrica" class="sm">Voltar ao de fábrica</button></div>
+  </div>
+  <div class="bloco">
+    <p class="bloco-titulo">Cache e logs</p>
+    <span class="caminho"><bdi id="ajCacheDir">—</bdi></span>
+    <p class="dica" id="ajCacheUso"></p>
+    <p class="aviso" id="ajCacheAviso" hidden></p>
+    <div class="acoes">
+      <button class="sm" data-cache="abrir-cache">Abrir pasta do cache</button>
+      <button class="sm" data-cache="limpar">Limpar cache</button>
+      <button class="sm" data-cache="abrir-logs">Abrir pasta de logs</button>
+    </div>
+    <div class="cache-antigo" data-cache-antigo hidden></div>
+    <p class="dica">O local e o tamanho máximo se escolhem no app (⚙ Configurações).</p>
+  </div>
+  <div class="bloco" data-so="resolve">
+    <p class="bloco-titulo">DaVinci Resolve</p>
+    <div id="dvEstado" class="dica">—</div>
+  </div>
+  <div class="bloco" data-so="mc">
+    <p class="bloco-titulo">Media Composer</p>
+    <div id="mcEstado" class="dica">—</div>
+    <div class="acoes"><button id="btnConsultar" class="sm">Consultar</button></div>
+  </div>
+  <div class="bloco">
+    <p class="bloco-titulo">Serviço</p>
+    <div class="caminho" id="ajServico">—</div>
+  </div>
+  <div class="bloco" data-so="mc">
+    <p class="bloco-titulo">Último arrasto</p>
+    <pre class="cru" id="ajArrasto">nada arrastado nesta sessão</pre>
+  </div>
+</section>
+
+<section id="paneConfig">
+  <div class="bloco convite" id="cfConvite" hidden>
+    <p class="bloco-titulo">Tudo pronto nesta máquina</p>
+    <p class="dica" id="cfConviteTexto"></p>
+    <div class="acoes"><button class="ghost sm" id="cfConviteDepois">Depois</button></div>
+  </div>
+  <div class="bloco">
+    <p class="bloco-titulo">Integrações</p>
+    <p class="dica">O plugin do De Lá Pra Cá dentro de cada programa. Instale, atualize ou remova com o
+      programa fechado.</p>
+    <div id="cfIntegracoes"></div>
+  </div>
+  <div class="bloco">
+    <p class="bloco-titulo">Cache</p>
+    <p class="dica">Conferências e timelines geradas. Apagar não perde trabalho: o app refaz quando
+      precisar.</p>
+    <span class="caminho"><bdi id="cfDir">—</bdi></span>
+    <div class="acoes">
+      <button class="sm" id="cfEscolher">Escolher…</button>
+      <button class="sm" id="cfPadrao">Usar padrão</button>
+      <button class="sm" id="cfAbrir">Abrir pasta</button>
+    </div>
+    <p class="dica" id="cfUso"></p>
+    <label class="cf-teto" for="cfTeto">Tamanho máximo
+      <input type="number" id="cfTeto" min="1" max="2000" step="1"> GB</label>
+    <p class="dica">Ao passar do limite, o que foi usado há mais tempo sai primeiro.</p>
+    <p class="aviso" id="cfAviso" hidden></p>
+    <div class="acoes"><button class="sm" id="cfLimpar">Limpar cache</button></div>
+    <div class="cache-antigo" data-cache-antigo hidden></div>
+  </div>
+  <div class="bloco">
+    <p class="bloco-titulo">Logs</p>
+    <p class="dica">Onde o app registra o que fez. É o que anexar ao reportar um problema.</p>
+    <span class="caminho"><bdi id="cfLogs">—</bdi></span>
+    <div class="acoes"><button class="sm" id="cfAbrirLogs">Abrir pasta de logs</button></div>
+  </div>
+  <div class="acoes">
+    <button class="ghost" id="cfCancelar">Cancelar</button>
+    <button class="primary" id="cfSalvar">Salvar</button>
+  </div>
+</section>
+
+<p class="msg" id="msg"></p>
+
+<div class="rodape">
+  <span class="versao" id="versao">—</span>
+</div>
+
+<script src="/static/painel.js"></script>
+</body>
+</html>

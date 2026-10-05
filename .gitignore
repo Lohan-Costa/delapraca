@@ -1,0 +1,32 @@
+# Ambiente (um venv por sistema operacional — ver ADR 0011)
+.venv/
+.venv-win/
+__pycache__/
+*.py[cod]
+build/
+dist/
+*.spec.bak
+
+# Empacotamento
+build.avpi
+plugins/*/painel/static/version.js
+
+# Segredos (rede de segurança para quem for contribuir)
+.env
+.env.*
+
+# Sistema / editor
+.DS_Store
+Thumbs.db
+._*
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.sw?
+
+# Saídas de trabalho e material de teste
+saidas/
+*.aaf
+*.avb
+*.log
+bench_*.jsonl
