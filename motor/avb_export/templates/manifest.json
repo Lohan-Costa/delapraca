@@ -1,0 +1,49 @@
+{
+  "templates": {
+    "video|h264": {
+      "file": "h264_video_template.avb",
+      "clip": "AVB_H264_VIDEO_TEMPLATE",
+      "kind": "video"
+    },
+    "audio|1|16|2": {
+      "file": "audio_1_16bit_2ch.avb",
+      "clip": "AVB_AUDIO_1_16BIT_2CH.WAV",
+      "kind": "audio"
+    },
+    "audio|7|16|2": {
+      "file": "audio_7_16bit_2ch.avb",
+      "clip": "AVB_AUDIO_7_16BIT_2CH.WAV",
+      "kind": "audio"
+    },
+    "audio|1|24|2": {
+      "file": "audio_1_24bit_2ch.avb",
+      "clip": "AVB_AUDIO_1_24BIT_2CH.WAV",
+      "kind": "audio"
+    },
+    "audio|1|24|3": {
+      "file": "audio_1_24bit_3ch.avb",
+      "clip": "AVB_AUDIO_1_24BIT_3CH.WAV",
+      "kind": "audio"
+    },
+    "audio|1|24|5": {
+      "file": "audio_1_24bit_5ch.avb",
+      "clip": "AVB_AUDIO_1_24BIT_5CH.WAV",
+      "kind": "audio"
+    },
+    "audio|10|32|3": {
+      "file": "audio_10_32bit_3ch.avb",
+      "clip": "AVB_AUDIO_10_32BIT_3CH.WAV",
+      "kind": "audio"
+    },
+    "audio|10|32|4": {
+      "file": "audio_10_32bit_4ch.avb",
+      "clip": "AVB_AUDIO_10_32BIT_4CH.WAV",
+      "kind": "audio"
+    },
+    "audio|10|32|5": {
+      "file": "audio_10_32bit_5ch.avb",
+      "clip": "AVB_AUDIO_10_32BIT_5CH.WAV",
+      "kind": "audio"
+    }
+  }
+}

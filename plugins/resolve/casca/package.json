@@ -1,0 +1,6 @@
+{
+  "name": "delapraca-resolve",
+  "version": "1.0.0",
+  "description": "Casca do De Lá Pra Cá no DaVinci Resolve (Workflow Integration Plugin)",
+  "main": "main.js"
+}

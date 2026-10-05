@@ -1,0 +1,2101 @@
+syntax = "proto3";
+
+package mcapi;
+
+message GetListOfBinItemsRequest {
+  RequestHeader header = 1;
+
+  GetListOfBinItemsRequestBody body = 2;
+}
+
+message GetListOfBinItemsResponse {
+  ResponseHeader header = 1;
+
+  GetListOfBinItemsResponseBody body = 2;
+}
+
+message GetListOfBinItemsRequestBody {
+  string bin_relative_path = 1;
+
+  repeated BinItemFlags bin_flags = 2;
+
+  bool only_visible_flag = 3;
+
+  bool only_selected_flag = 4;
+
+  enum BinItemFlags {
+    AllTypes = 0;
+
+    masterClips = 1;
+
+    linkedMasterClips = 2;
+
+    subclips = 3;
+
+    sequences = 4;
+
+    sources = 5;
+
+    effects = 6;
+
+    motionEffects = 7;
+
+    preCompsRE = 8;
+
+    preCompsTMK = 9;
+
+    groups = 10;
+
+    stereoscopicClips = 11;
+  }
+}
+
+message GetListOfBinItemsResponseBody {
+  string mob_name = 1;
+
+  string mob_id = 2;
+
+  bool mob_selected = 3;
+}
+
+message EchoRequest {
+  RequestHeader header = 1;
+
+  EchoRequestBody body = 2;
+}
+
+message EchoResponse {
+  ResponseHeader header = 1;
+
+  EchoResponseBody body = 2;
+}
+
+message EchoRequestBody {
+  string message = 1;
+}
+
+message EchoResponseBody {
+  string message = 1;
+}
+
+message GetValuesRequest {
+  RequestHeader header = 1;
+
+  GetValuesRequestBody body = 2;
+}
+
+message GetValuesResponse {
+  ResponseHeader header = 1;
+
+  GetValuesResponseBody body = 2;
+}
+
+message GetValuesRequestBody {
+  string key = 1;
+
+  uint32 count = 2;
+}
+
+message GetValuesResponseBody {
+  string value = 1;
+}
+
+message GetAppInfoRequest {
+  RequestHeader header = 1;
+
+  GetAppInfoRequestBody body = 2;
+}
+
+message GetAppInfoRequestBody {
+}
+
+message GetAppInfoResponse {
+  ResponseHeader header = 1;
+
+  GetAppInfoResponseBody body = 2;
+}
+
+message GetAppInfoResponseBody {
+  string app_name = 1;
+
+  string app_version = 2;
+
+  AppBusyStatus app_busy_status = 3;
+
+  string sdk_version = 4;
+
+  optional LicenseType license_type = 5;
+
+  optional string serial_number = 6;
+
+  enum AppBusyStatus {
+    Idle = 0;
+
+    Playing = 1;
+
+    ModalDialog = 2;
+
+    Busy = 3;
+  }
+
+  enum LicenseType {
+    Unknown = 0;
+
+    Dongle = 1;
+
+    Trial = 2;
+
+    Floating = 3;
+
+    Rental = 4;
+
+    NodeLocked = 5;
+
+    MCFirst = 6;
+  }
+}
+
+message GetHostInfoRequest {
+  RequestHeader header = 1;
+
+  GetHostInfoRequestBody body = 2;
+}
+
+message GetHostInfoRequestBody {
+}
+
+message GetHostInfoResponse {
+  ResponseHeader header = 1;
+
+  GetHostInfoResponseBody body = 2;
+}
+
+message GetHostInfoResponseBody {
+  string appl_name = 1;
+
+  string user_name = 2;
+
+  string workstation_name = 3;
+}
+
+message GetBinsRequest {
+  RequestHeader header = 1;
+
+  GetBinsRequestBody body = 2;
+}
+
+message GetBinsRequestBody {
+  optional string project_path = 1;
+
+  repeated GetBinsFlag request_flag = 2;
+
+  enum GetBinsFlag {
+    AllTypes = 0;
+
+    BinType = 1;
+
+    ScriptType = 2;
+
+    VolumeType = 3;
+
+    OnlyOpen = 4;
+  }
+}
+
+message GetBinsResponse {
+  ResponseHeader header = 1;
+
+  GetBinsResponseBody body = 2;
+}
+
+message GetBinsResponseBody {
+  string absolute_path = 1;
+}
+
+message GetBinInfoRequest {
+  RequestHeader header = 1;
+
+  GetBinInfoRequestBody body = 2;
+}
+
+message GetBinInfoRequestBody {
+  string relative_bin_path = 1;
+}
+
+message GetBinInfoResponse {
+  ResponseHeader header = 1;
+
+  GetBinInfoResponseBody body = 2;
+}
+
+message GetBinInfoResponseBody {
+  bool lock_state = 1;
+
+  string lock_owner = 2;
+
+  uint64 size = 3;
+
+  bool is_open = 4;
+
+  string background_color = 5;
+}
+
+message GetBinColumnInfoRequest {
+  RequestHeader header = 1;
+
+  GetBinColumnInfoRequestBody body = 2;
+}
+
+message GetBinColumnInfoRequestBody {
+  string bin_path = 1;
+}
+
+message GetBinColumnInfoResponse {
+  ResponseHeader header = 1;
+
+  GetBinColumnInfoResponseBody body = 2;
+}
+
+message GetBinColumnInfoResponseBody {
+  repeated BinColumnInfo column = 1;
+
+  message BinColumnInfo {
+    string column_name = 1;
+
+    string column_value_type = 2;
+
+    bool column_hidden = 3;
+
+    bool column_is_custom = 4;
+
+    bool column_is_readonly = 5;
+  }
+}
+
+message GetMobInfoRequest {
+  RequestHeader header = 1;
+
+  GetMobInfoRequestBody body = 2;
+}
+
+message GetMobInfoRequestBody {
+  string mob_id = 1;
+
+  bool only_visible_columns = 2;
+
+  bool includes_empty_columns = 3;
+}
+
+message GetMobInfoResponse {
+  ResponseHeader header = 1;
+
+  GetMobInfoResponseBody body = 2;
+}
+
+message GetMobInfoResponseBody {
+  string column_name = 1;
+
+  string column_value = 2;
+
+  string column_value_type = 3;
+
+  bool column_hidden = 4;
+
+  bool column_is_custom = 5;
+}
+
+message SetMobInfoRequest {
+  RequestHeader header = 1;
+
+  SetMobInfoRequestBody body = 2;
+}
+
+message SetMobInfoRequestBody {
+  string mob_id = 1;
+
+  ColumnInfo column = 2;
+}
+
+message ColumnInfo {
+  string column_name = 1;
+
+  string column_value = 2;
+}
+
+message SetMobInfoResponse {
+  ResponseHeader header = 1;
+
+  SetMobInfoResponseBody body = 2;
+}
+
+message SetMobInfoResponseBody {
+  repeated MobFailure mob_failure = 1 [deprecated = true];
+
+  message MobFailure {
+    string mob_id = 1;
+
+    repeated ColumnInfo failed_columns = 2;
+  }
+}
+
+message OpenBinRequest {
+  RequestHeader header = 1;
+
+  OpenBinRequestBody body = 2;
+}
+
+message OpenBinRequestBody {
+  string bin_path = 1;
+
+  bool read_only = 2;
+}
+
+message OpenBinResponse {
+  ResponseHeader header = 1;
+
+  OpenBinResponseBody body = 2;
+}
+
+message OpenBinResponseBody {
+  bool is_locked_by_other = 1;
+
+  string lock_owner = 2;
+}
+
+message CreateBinRequest {
+  RequestHeader header = 1;
+
+  CreateBinRequestBody body = 2;
+}
+
+message CreateBinRequestBody {
+  string folder_path = 1;
+
+  string bin_name = 2;
+
+  OpenBinOption option = 3;
+
+  enum OpenBinOption {
+    FloatBin = 0;
+
+    LastActiveBinContainer = 1;
+
+    FollowBinSettings = 2;
+  }
+}
+
+message CreateBinResponse {
+  ResponseHeader header = 1;
+
+  CreateBinResponseBody body = 2;
+}
+
+message CreateBinResponseBody {
+}
+
+message ConfigureSRTStreamRequest {
+  RequestHeader header = 1;
+
+  ConfigureSRTStreamRequestBody body = 2;
+}
+
+message ConfigureSRTStreamRequestBody {
+  string stream_name = 1;
+
+  string ip_address = 2;
+
+  int32 port = 3;
+
+  string password = 4;
+
+  int32 latency = 5;
+
+  QualityOption quality_option = 6;
+
+  ModeOption mode_option = 7;
+
+  optional string secret_suffix = 8;
+
+  optional bool use_password = 9;
+
+  enum QualityOption {
+    Low = 0;
+
+    Medium = 1;
+
+    High = 2;
+  }
+
+  enum ModeOption {
+    Listener = 0;
+
+    Caller = 1;
+  }
+}
+
+message ConfigureSRTStreamResponse {
+  ResponseHeader header = 1;
+
+  ConfigureSRTStreamResponseBody body = 2;
+}
+
+message ConfigureSRTStreamResponseBody {
+}
+
+message GetSRTStreamSettingsRequest {
+  RequestHeader header = 1;
+
+  GetSRTStreamSettingsRequestBody body = 2;
+}
+
+message GetSRTStreamSettingsRequestBody {
+}
+
+message GetSRTStreamSettingsResponse {
+  ResponseHeader header = 1;
+
+  GetSRTStreamSettingsResponseBody body = 2;
+}
+
+message GetSRTStreamSettingsResponseBody {
+  string stream_name = 1;
+
+  string ip_address = 2;
+
+  int32 port = 3;
+
+  string password = 4;
+
+  int32 latency = 5;
+
+  QualityOption quality_option = 6;
+
+  ModeOption mode_option = 7;
+
+  enum QualityOption {
+    Low = 0;
+
+    Medium = 1;
+
+    High = 2;
+  }
+
+  enum ModeOption {
+    Listener = 0;
+
+    Caller = 1;
+  }
+}
+
+message GetOTSSessionStatusRequest {
+  RequestHeader header = 1;
+
+  GetOTSSessionStatusRequestBody body = 2;
+}
+
+message GetOTSSessionStatusRequestBody {
+}
+
+message GetOTSSessionStatusResponse {
+  ResponseHeader header = 1;
+
+  GetOTSSessionStatusResponseBody body = 2;
+}
+
+message GetOTSSessionStatusResponseBody {
+  string status = 1;
+
+  string session_id = 2;
+
+  string creation_date = 3;
+
+  string tenant_id = 4;
+
+  string stream_name = 5;
+
+  string ip_address = 6;
+
+  int32 port = 7;
+
+  string password = 8 [deprecated = true];
+
+  int32 latency = 9;
+
+  QualityOption quality_option = 10;
+
+  ModeOption mode_option = 11;
+
+  enum QualityOption {
+    Low = 0;
+
+    Medium = 1;
+
+    High = 2;
+  }
+
+  enum ModeOption {
+    Listener = 0;
+
+    Caller = 1;
+  }
+}
+
+message SetOTSSessionStatusRequest {
+  RequestHeader header = 1;
+
+  SetOTSSessionStatusRequestBody body = 2;
+}
+
+message SetOTSSessionStatusRequestBody {
+  string status = 1;
+
+  string session_id = 2;
+
+  string tenant_id = 3;
+
+  string stream_name = 4;
+
+  string ip_address = 5;
+
+  int32 port = 6;
+
+  string password = 7 [deprecated = true];
+
+  int32 latency = 8;
+
+  QualityOption quality_option = 9;
+
+  ModeOption mode_option = 10;
+
+  enum QualityOption {
+    Low = 0;
+
+    Medium = 1;
+
+    High = 2;
+  }
+
+  enum ModeOption {
+    Listener = 0;
+
+    Caller = 1;
+  }
+}
+
+message SetOTSSessionStatusResponse {
+  ResponseHeader header = 1;
+
+  SetOTSSessionStatusResponseBody body = 2;
+}
+
+message SetOTSSessionStatusResponseBody {
+}
+
+message GetMediaVolumeListRequest {
+  RequestHeader header = 1;
+
+  GetMediaVolumeListRequestBody body = 2;
+}
+
+message GetMediaVolumeListRequestBody {
+}
+
+message GetMediaVolumeListResponse {
+  ResponseHeader header = 1;
+
+  GetMediaVolumeListResponseBody body = 2;
+}
+
+message GetMediaVolumeListResponseBody {
+  repeated MediaVolume volumes = 1;
+
+  message MediaVolume {
+    string name = 1;
+
+    bool is_shared = 2;
+
+    uint64 free_space = 3;
+  }
+}
+
+message GetMediaVolumeItemsRequestBody {
+  string volume_name = 1;
+
+  string relative_path = 2;
+
+  VolumeItemFilter type = 3;
+
+  enum VolumeItemFilter {
+    All = 0;
+
+    OnlyDirectories = 1;
+
+    OnlyFiles = 2;
+  }
+}
+
+message GetMediaVolumeItemsRequest {
+  RequestHeader header = 1;
+
+  GetMediaVolumeItemsRequestBody body = 2;
+}
+
+message GetMediaVolumeItemsResponse {
+  ResponseHeader header = 1;
+
+  GetMediaVolumeItemsResponseBody body = 2;
+}
+
+message GetMediaVolumeItemsResponseBody {
+  repeated MediaVolumeItem item = 1;
+
+  message MediaVolumeItem {
+    string relative_volume_path = 1;
+
+    bool is_directory = 2;
+  }
+}
+
+message GetOpenProjectInfoRequest {
+  RequestHeader header = 1;
+
+  GetOpenProjectInfoRequestBody body = 2;
+}
+
+message GetOpenProjectInfoRequestBody {
+}
+
+message GetOpenProjectInfoResponse {
+  ResponseHeader header = 1;
+
+  GetOpenProjectInfoResponseBody body = 2;
+}
+
+message GetOpenProjectInfoResponseBody {
+  string path = 1;
+
+  string project_type = 2;
+
+  FrameRate frame_rate = 3;
+
+  string color_space = 4;
+
+  int32 raster_width = 5;
+
+  int32 raster_height = 6;
+
+  Stereoscopic stereoscopic = 7;
+
+  bool drop_frame = 8;
+
+  Timestamp creation_date = 9;
+
+  Timestamp modify_date = 10;
+
+  bool film = 11;
+
+  string film_perf = 12;
+}
+
+message GetCustomProjectDataRequest {
+  RequestHeader header = 1;
+
+  GetCustomProjectDataRequestBody body = 2;
+}
+
+message GetCustomProjectDataRequestBody {
+  string data_id = 1;
+
+  string data_key = 2;
+}
+
+message GetCustomProjectDataResponse {
+  ResponseHeader header = 1;
+
+  GetCustomProjectDataResponseBody body = 2;
+}
+
+message GetCustomProjectDataResponseBody {
+  string data_value = 1;
+}
+
+message SetCustomProjectDataRequest {
+  RequestHeader header = 1;
+
+  SetCustomProjectDataRequestBody body = 2;
+}
+
+message SetCustomProjectDataRequestBody {
+  string data_id = 1;
+
+  string data_key = 2;
+
+  string data_value = 3;
+}
+
+message SetCustomProjectDataResponse {
+  ResponseHeader header = 1;
+
+  SetCustomProjectDataResponseBody body = 2;
+}
+
+message SetCustomProjectDataResponseBody {
+}
+
+message FrameRate {
+  int32 num = 1;
+
+  int32 den = 2;
+}
+
+message ScanAvidMediaFilesFolderRequest {
+  RequestHeader header = 1;
+
+  ScanAvidMediaFilesFolderRequestBody body = 2;
+}
+
+message ScanAvidMediaFilesFolderRequestBody {
+  string destination_path = 1;
+}
+
+message ScanAvidMediaFilesFolderResponse {
+  ResponseHeader header = 1;
+
+  ScanAvidMediaFilesFolderResponseBody body = 2;
+}
+
+message ScanAvidMediaFilesFolderResponseBody {
+}
+
+message CreateClipsFromAvidMediaFilesFolderRequest {
+  RequestHeader header = 1;
+
+  CreateClipsFromAvidMediaFilesFolderRequestBody body = 2;
+}
+
+message CreateClipsFromAvidMediaFilesFolderRequestBody {
+  string bin_path = 1;
+
+  string media_folder_path = 2;
+
+  repeated string media_file_path = 3;
+}
+
+message CreateClipsFromAvidMediaFilesFolderResponse {
+  ResponseHeader header = 1;
+
+  CreateClipsFromAvidMediaFilesFolderResponseBody body = 2;
+}
+
+message CreateClipsFromAvidMediaFilesFolderResponseBody {
+}
+
+message CreateCustomColumnRequest {
+  RequestHeader header = 1;
+
+  CreateCustomColumnRequestBody body = 2;
+}
+
+message CreateCustomColumnRequestBody {
+  string absolute_bin_path = 1;
+
+  string new_column_name = 2;
+
+  string after_column_name = 3;
+
+  bool column_hidden = 4;
+}
+
+message CreateCustomColumnResponse {
+  ResponseHeader header = 1;
+
+  CreateCustomColumnResponseBody body = 2;
+}
+
+message CreateCustomColumnResponseBody {
+}
+
+message GetListOfExportEDLSettingsRequest {
+  RequestHeader header = 1;
+
+  GetListOfExportEDLSettingsRequestBody body = 2;
+}
+
+message GetListOfExportEDLSettingsRequestBody {
+}
+
+message GetListOfExportEDLSettingsResponse {
+  ResponseHeader header = 1;
+
+  GetListOfExportEDLSettingsResponseBody body = 2;
+}
+
+message GetListOfExportEDLSettingsResponseBody {
+  repeated string setting_names = 1;
+}
+
+message ExportEDLRequest {
+  RequestHeader header = 1;
+
+  ExportEDLRequestBody body = 2;
+}
+
+message ExportEDLRequestBody {
+  string mob_id = 1;
+
+  string edl_settings_name = 2;
+
+  TrackList track_list = 3;
+}
+
+message TrackList {
+  repeated TrackLabel track_labels = 1;
+}
+
+message TrackLabel {
+  TrackType type = 1;
+
+  uint32 number = 2;
+}
+
+message ExportEDLResponse {
+  ResponseHeader header = 1;
+
+  ExportEDLResponseBody body = 2;
+}
+
+message ExportEDLResponseBody {
+  string path = 1;
+
+  repeated string dialog_contents = 2 [deprecated = true];
+}
+
+message GetMobTrackInfoRequest {
+  RequestHeader header = 1;
+
+  GetMobTrackInfoRequestBody body = 2;
+}
+
+message GetMobTrackInfoRequestBody {
+  string mob_id = 1;
+}
+
+message GetMobTrackInfoResponse {
+  ResponseHeader header = 1;
+
+  GetMobTrackInfoResponseBody body = 2;
+}
+
+message TrackInfo {
+  TrackLabel label = 1;
+
+  string custom_name = 2;
+
+  bool selected = 3;
+
+  bool monitored = 4;
+
+  bool enabled = 5;
+
+  bool solo = 6;
+
+  bool mute = 7;
+
+  bool locked = 8;
+
+  bool sync_locked = 9;
+
+  int32 num_segments = 10;
+
+  AudioTrackType audio_type = 11;
+}
+
+message TrackInfoList {
+  repeated TrackInfo track_info = 1;
+}
+
+message GetMobTrackInfoResponseBody {
+  TrackInfoList track_info_list = 1;
+}
+
+message RequestHeader {
+  string company_id = 1;
+
+  string access_token = 2;
+}
+
+message ResponseHeader {
+  string task_id = 1;
+
+  TaskStatus status = 3 [deprecated = true];
+
+  int32 progress = 4;
+
+  CommandError error = 5 [deprecated = true];
+
+  repeated string warnings = 6;
+}
+
+message Timestamp {
+  int64 seconds = 1;
+
+  int32 nanos = 2;
+}
+
+message CommandError {
+  CommandErrorType command_error_type = 1;
+
+  string command_error_message = 2;
+
+  bool is_warning = 3;
+}
+
+message ExportFileRequest {
+  RequestHeader header = 1;
+
+  ExportFileRequestBody body = 2;
+}
+
+message ExportFileRequestBody {
+  string mob_id = 1;
+
+  string file_name = 2;
+
+  string export_settings_name = 3;
+
+  string destination_path = 4;
+
+  string in_directory = 5;
+
+  repeated ExportFileOption option_flags = 6;
+}
+
+message ExportFileResponse {
+  ResponseHeader header = 1;
+
+  ExportFileResponseBody body = 2;
+}
+
+message ExportFileResponseBody {
+  string path = 1 [deprecated = true];
+}
+
+message ImportFileRequest {
+  RequestHeader header = 1;
+
+  ImportFileRequestBody body = 2;
+}
+
+message ImportFileRequestBody {
+  string file_path = 1;
+
+  string import_settings_name = 2;
+
+  string destination_video_drive = 3;
+
+  string destination_audio_drive = 4;
+
+  string compression = 5;
+
+  string video_wrapper_format = 6;
+
+  string audio_wrapper_format = 7;
+
+  string destination_bin = 8;
+
+  repeated ImportFileOption option_flags = 9;
+}
+
+message ImportFileResponse {
+  ResponseHeader header = 1;
+
+  ImportFileResponseBody body = 2;
+}
+
+message ImportFileResponseBody {
+  string mob_id = 1 [deprecated = true];
+}
+
+message LoadSettingRequest {
+  RequestHeader header = 1;
+
+  LoadSettingRequestBody body = 2;
+}
+
+message LoadSettingRequestBody {
+  string unique_id = 1;
+
+  string xml_setting = 2;
+}
+
+message LoadSettingResponse {
+  ResponseHeader header = 1;
+}
+
+message GetListOfExportSettingsRequest {
+  RequestHeader header = 1;
+
+  GetListOfExportSettingsRequestBody body = 2;
+}
+
+message GetListOfExportSettingsRequestBody {
+}
+
+message GetListOfExportSettingsResponse {
+  ResponseHeader header = 1;
+
+  GetListOfExportSettingsResponseBody body = 2;
+}
+
+message GetListOfExportSettingsResponseBody {
+  repeated string setting_names = 1;
+}
+
+message GetListOfImportSettingsRequest {
+  RequestHeader header = 1;
+
+  GetListOfImportSettingsRequestBody body = 2;
+}
+
+message GetListOfImportSettingsRequestBody {
+}
+
+message GetListOfImportSettingsResponse {
+  ResponseHeader header = 1;
+
+  GetListOfImportSettingsResponseBody body = 2;
+}
+
+message GetListOfImportSettingsResponseBody {
+  repeated string setting_names = 1;
+}
+
+message AddMarkerRequest {
+  RequestHeader header = 1;
+
+  AddMarkerRequestBody body = 2;
+}
+
+message AddMarkerRequestBody {
+  string mob_id = 1;
+
+  TrackLabel track_label = 2;
+
+  int32 offset = 3;
+
+  string timecode = 4;
+
+  int32 length = 5;
+
+  string comment = 6;
+
+  MarkerColor color = 7;
+
+  string name = 8;
+
+  string guid = 9;
+
+  string user = 10;
+
+  optional string svg_annotation = 11;
+}
+
+message AddMarkerResponse {
+  ResponseHeader header = 1;
+
+  AddMarkerResponseBody body = 2;
+}
+
+message AddMarkerResponseBody {
+  string guid = 1;
+}
+
+message LoadMobsIntoViewerRequest {
+  RequestHeader header = 1;
+
+  LoadMobsIntoViewerRequestBody body = 2;
+}
+
+message LoadMobsIntoViewerRequestBody {
+  repeated string mob_ids = 1;
+
+  ViewerType view_type = 2;
+}
+
+message LoadMobsIntoViewerResponse {
+  ResponseHeader header = 1;
+
+  LoadMobsIntoViewerResponseBody body = 2;
+}
+
+message LoadMobsIntoViewerResponseBody {
+}
+
+message SelectMobsInBinRequest {
+  RequestHeader header = 1;
+
+  SelectMobsInBinRequestBody body = 2;
+}
+
+message SelectMobsInBinRequestBody {
+  string bin_path = 1;
+
+  repeated string mob_ids = 2;
+
+  bool add_to_selection = 3;
+}
+
+message SelectMobsInBinResponse {
+  ResponseHeader header = 1;
+
+  SelectMobsInBinResponseBody body = 2;
+}
+
+message SelectMobsInBinResponseBody {
+  repeated string selected_mob_ids = 1;
+}
+
+message GetViewerMobsRequest {
+  RequestHeader header = 1;
+
+  GetViewerMobsRequestBody body = 2;
+}
+
+message GetViewerMobsRequestBody {
+}
+
+message GetViewerMobsResponse {
+  ResponseHeader header = 1;
+
+  GetViewerMobsResponseBody body = 2;
+}
+
+message MobInViewer {
+  string mob_id = 1;
+
+  ViewerType view_type = 2;
+
+  int32 current_frame = 3;
+
+  string current_timecode = 4;
+
+  optional bool active = 5;
+}
+
+message GetViewerMobsResponseBody {
+  repeated MobInViewer mobs = 1;
+}
+
+message GetBinFromMobRequest {
+  RequestHeader header = 1;
+
+  GetBinFromMobRequestBody body = 2;
+}
+
+message GetBinFromMobRequestBody {
+  string mob_id = 1;
+}
+
+message GetBinFromMobResponse {
+  ResponseHeader header = 1;
+
+  GetBinFromMobResponseBody body = 2;
+}
+
+message GetBinFromMobResponseBody {
+  string absolute_path = 1;
+}
+
+message AddMarkersRequest {
+  RequestHeader header = 1;
+
+  AddMarkersRequestBody body = 2;
+}
+
+message RequestMarkerInfo {
+  string name = 1;
+
+  TrackLabel track_label = 2;
+
+  int32 offset = 3;
+
+  string timecode = 4;
+
+  int32 length = 5;
+
+  string comment = 6;
+
+  MarkerColor color = 7;
+
+  string guid = 8;
+
+  string user = 9;
+
+  optional string svg_annotation = 10;
+}
+
+message AddMarkersRequestBody {
+  string mob_id = 1;
+
+  repeated RequestMarkerInfo info = 2;
+}
+
+message AddMarkersResponse {
+  ResponseHeader header = 1;
+
+  AddMarkersResponseBody body = 2;
+}
+
+message AddMarkersResponseBody {
+}
+
+message GetMarkersRequest {
+  RequestHeader header = 1;
+
+  GetMarkersRequestBody body = 2;
+}
+
+message GetMarkersRequestBody {
+  string mob_id = 1;
+
+  string guid = 2;
+
+  oneof range {
+    offsetFilter offset = 3;
+
+    tcFilter timecode = 4;
+  }
+
+  oneof track_filter {
+    TrackLabel track = 5;
+  }
+
+  optional bool include_svg_annotation = 6;
+
+  message offsetFilter {
+    int32 frame = 1;
+
+    int32 length = 2;
+  }
+
+  message tcFilter {
+    string start = 1;
+
+    string duration = 2;
+  }
+}
+
+message GetMarkersResponse {
+  ResponseHeader header = 1;
+
+  GetMarkersResponseBody body = 2;
+}
+
+message ResponseMarkerInfo {
+  string name = 1;
+
+  TrackLabel track_label = 2;
+
+  int32 offset = 3;
+
+  string timecode = 4;
+
+  int32 length = 5;
+
+  string comment = 6;
+
+  MarkerColor color = 7;
+
+  Timestamp creation_date = 8;
+
+  string guid = 9;
+
+  string user = 10;
+
+  optional string svg_annotation = 11;
+}
+
+message GetMarkersResponseBody {
+  repeated ResponseMarkerInfo info = 2;
+}
+
+message ChangeMarkerRequest {
+  RequestHeader header = 1;
+
+  ChangeMarkerRequestBody body = 2;
+}
+
+message ChangeMarkerRequestBody {
+  string mob_id = 1;
+
+  string guid = 2;
+
+  MarkerInfo info = 3;
+
+  optional bool include_svg_annotation = 4;
+
+  message MarkerInfo {
+    string name = 1;
+
+    string comment = 2;
+
+    MarkerColor color = 3;
+
+    TrackLabel track_label = 4;
+
+    string user = 5;
+
+    optional string svg_annotation = 6;
+  }
+}
+
+message ChangeMarkerResponse {
+  ResponseHeader header = 1;
+
+  ChangeMarkerResponseBody body = 2;
+}
+
+message ChangeMarkerResponseBody {
+}
+
+message CreateSubClipRequest {
+  RequestHeader header = 1;
+
+  CreateSubClipRequestBody body = 2;
+}
+
+message CreateSubClipRequestBody {
+  string destination_bin_path = 1;
+
+  string mob_id = 2;
+
+  TrackList track_list = 3;
+
+  bool use_clip_bounds = 4;
+
+  bool use_marks_bounds = 5;
+
+  int32 head_frame = 6;
+
+  string head_timecode = 7;
+
+  int32 end_frame = 8;
+
+  string end_timecode = 9;
+
+  int32 add_frames_at_head = 10;
+
+  int32 add_frames_at_end = 11;
+
+  bool retain_marks = 12;
+
+  bool retain_markers = 13;
+
+  bool create_new_sequence = 14;
+
+  bool enabled_tracks_only = 15;
+}
+
+message CreateSubClipResponse {
+  ResponseHeader header = 1;
+
+  CreateSubClipResponseBody body = 2;
+}
+
+message CreateSubClipResponseBody {
+}
+
+message CloseBinRequest {
+  RequestHeader header = 1;
+
+  CloseBinRequestBody body = 2;
+}
+
+message CloseBinRequestBody {
+  string bin_path = 1;
+}
+
+message CloseBinResponse {
+  ResponseHeader header = 1;
+
+  CloseBinResponseBody body = 2;
+}
+
+message CloseBinResponseBody {
+}
+
+message MoveBinItemsRequest {
+  RequestHeader header = 1;
+
+  MoveBinItemsRequestBody body = 2;
+}
+
+message MoveBinItemsRequestBody {
+  string source_bin_path = 1;
+
+  string destination_bin_path = 2;
+
+  repeated string mob_id = 3;
+}
+
+message MoveBinItemsResponse {
+  ResponseHeader header = 1;
+
+  MoveBinItemsResponseBody body = 2;
+}
+
+message MoveBinItemsResponseBody {
+  repeated string mob_id = 3;
+}
+
+message CopyBinItemsRequest {
+  RequestHeader header = 1;
+
+  CopyBinItemsRequestBody body = 2;
+}
+
+message CopyBinItemsRequestBody {
+  string source_bin_path = 1;
+
+  string destination_bin_path = 2;
+
+  repeated string mob_id = 3;
+}
+
+message CopyBinItemsResponse {
+  ResponseHeader header = 1;
+
+  CopyBinItemsResponseBody body = 2;
+}
+
+message CopyBinItemsResponseBody {
+  repeated string mob_id = 3;
+}
+
+message DuplicateBinItemsRequest {
+  RequestHeader header = 1;
+
+  DuplicateBinItemsRequestBody body = 2;
+}
+
+message DuplicateBinItemsRequestBody {
+  string bin_path = 1;
+
+  repeated string mob_id = 3;
+}
+
+message DuplicateBinItemsResponse {
+  ResponseHeader header = 1;
+
+  DuplicateBinItemsResponseBody body = 2;
+}
+
+message DuplicateBinItemsResponseBody {
+  repeated string mob_id = 3;
+}
+
+message GetListOfLinkSettingsRequest {
+  RequestHeader header = 1;
+
+  GetListOfLinkSettingsRequestBody body = 2;
+}
+
+message GetListOfLinkSettingsRequestBody {
+}
+
+message GetListOfLinkSettingsResponse {
+  ResponseHeader header = 1;
+
+  GetListOfLinkSettingsResponseBody body = 2;
+}
+
+message GetListOfLinkSettingsResponseBody {
+  repeated string setting_names = 1;
+}
+
+message LinkFileRequest {
+  RequestHeader header = 1;
+
+  LinkFileRequestBody body = 2;
+}
+
+message LinkFileRequestBody {
+  string file_path = 1;
+
+  string destination_bin = 2;
+
+  string link_settings_name = 3;
+}
+
+message LinkFileResponse {
+  ResponseHeader header = 1;
+
+  LinkFileResponseBody body = 2;
+}
+
+message LinkFileResponseBody {
+  string mob_id = 1;
+}
+
+message GetListOfJobQueuesRequest {
+  RequestHeader header = 1;
+
+  GetListOfJobQueuesRequestBody body = 2;
+}
+
+message GetListOfJobQueuesRequestBody {
+}
+
+message GetListOfJobQueuesResponse {
+  ResponseHeader header = 1;
+
+  GetListOfJobQueuesResponseBody body = 2;
+}
+
+message GetListOfJobQueuesResponseBody {
+  repeated JobsQueue job_queues = 1;
+
+  message JobsQueue {
+    string name = 1;
+
+    string id = 2;
+  }
+}
+
+message DeleteMarkersRequest {
+  RequestHeader header = 1;
+
+  DeleteMarkersRequestBody body = 2;
+}
+
+message DeleteMarkersRequestBody {
+  string mob_id = 1;
+
+  repeated string guid = 2;
+
+  optional string timecode_range_start = 3;
+
+  optional string timecode_range_end = 4;
+
+  optional MarkerColor color = 5;
+
+  optional TrackLabel track_label = 6;
+}
+
+message DeleteMarkersResponse {
+  ResponseHeader header = 1;
+
+  DeleteMarkersResponseBody body = 2;
+}
+
+message DeleteMarkersResponseBody {
+}
+
+message GetListOfCommandsRequest {
+  RequestHeader header = 1;
+
+  GetListOfCommandsRequestBody body = 2;
+}
+
+message GetListOfCommandsRequestBody {
+}
+
+message GetListOfCommandsResponse {
+  ResponseHeader header = 1;
+
+  GetListOfCommandsResponseBody body = 2;
+}
+
+message GetListOfCommandsResponseBody {
+  repeated CommandInfo commands = 1;
+
+  message CommandInfo {
+    string name = 1;
+
+    int32 commandId = 2;
+
+    string category = 3;
+  }
+}
+
+message DoCommandRequest {
+  RequestHeader header = 1;
+
+  DoCommandRequestBody body = 2;
+}
+
+message DoCommandRequestBody {
+  int32 commandId = 1;
+}
+
+message DoCommandResponse {
+  ResponseHeader header = 1;
+
+  DoCommandResponseBody body = 2;
+}
+
+message DoCommandResponseBody {
+}
+
+message IsCommandsEnabledRequest {
+  RequestHeader header = 1;
+
+  IsCommandsEnabledRequestBody body = 2;
+}
+
+message IsCommandsEnabledRequestBody {
+  repeated int32 commandsId = 1;
+}
+
+message IsCommandsEnabledResponse {
+  ResponseHeader header = 1;
+
+  IsCommandsEnabledResponseBody body = 2;
+}
+
+message IsCommandsEnabledResponseBody {
+  repeated CommandEnableInfo commands = 1;
+
+  message CommandEnableInfo {
+    int32 commandId = 1;
+
+    bool enable = 2;
+  }
+}
+
+message StartPlayRequest {
+  RequestHeader header = 1;
+
+  StartPlayRequestBody body = 2;
+}
+
+message StartPlayRequestBody {
+  string mob_id = 1;
+
+  string timecode = 2;
+
+  int32 offset = 3;
+}
+
+message StartPlayResponse {
+  ResponseHeader header = 1;
+
+  StartPlayResponseBody body = 2;
+}
+
+message StartPlayResponseBody {
+}
+
+message StopPlayRequest {
+  RequestHeader header = 1;
+
+  StopPlayRequestBody body = 2;
+}
+
+message StopPlayRequestBody {
+}
+
+message StopPlayResponse {
+  ResponseHeader header = 1;
+
+  StopPlayResponseBody body = 2;
+}
+
+message StopPlayResponseBody {
+}
+
+message SetPositionRequest {
+  RequestHeader header = 1;
+
+  SetPositionRequestBody body = 2;
+}
+
+message SetPositionRequestBody {
+  string mob_id = 1;
+
+  string timecode = 2;
+
+  int32 offset = 3;
+}
+
+message SetPositionResponse {
+  ResponseHeader header = 1;
+
+  SetPositionResponseBody body = 2;
+}
+
+message SetPositionResponseBody {
+}
+
+message GetListOfWindowsRequest {
+  RequestHeader header = 1;
+
+  GetListOfWindowsRequestBody body = 2;
+}
+
+message GetListOfWindowsRequestBody {
+  WindowsFilter windows_filter = 1;
+
+  string windows_type = 3;
+
+  enum WindowsFilter {
+    ALL = 0;
+
+    VISIBLE = 1;
+
+    ACTIVE = 2;
+  }
+}
+
+message GetListOfWindowsResponse {
+  ResponseHeader header = 1;
+
+  GetListOfWindowsResponseBody body = 2;
+}
+
+message GetListOfWindowsResponseBody {
+  repeated WindowInfo windows = 1;
+
+  message WindowInfo {
+    string id = 1;
+
+    string name = 2;
+
+    string type = 3;
+
+    bool visibility = 4;
+
+    bool instanceType = 5;
+
+    bool active = 6;
+  }
+}
+
+message GetListOfSequenceTemplatesRequest {
+  RequestHeader header = 1;
+
+  GetListOfSequenceTemplatesRequestBody body = 2;
+}
+
+message GetListOfSequenceTemplatesRequestBody {
+}
+
+message GetListOfSequenceTemplatesResponse {
+  ResponseHeader header = 1;
+
+  GetListOfSequenceTemplatesResponseBody body = 2;
+}
+
+message GetListOfSequenceTemplatesResponseBody {
+  repeated string setting_names = 1;
+
+  string active_setting = 2;
+}
+
+message MakeActiveWindowRequest {
+  RequestHeader header = 1;
+
+  MakeActiveWindowRequestBody body = 2;
+}
+
+message MakeActiveWindowRequestBody {
+  string window_id = 1;
+}
+
+message MakeActiveWindowResponse {
+  ResponseHeader header = 1;
+
+  MakeActiveWindowResponseBody body = 2;
+}
+
+message MakeActiveWindowResponseBody {
+}
+
+message MakeViewerActiveRequest {
+  RequestHeader header = 1;
+
+  MakeViewerActiveRequestBody body = 2;
+}
+
+message MakeViewerActiveRequestBody {
+  ViewerType type = 1;
+
+  string mob_id = 2;
+}
+
+message MakeViewerActiveResponse {
+  ResponseHeader header = 1;
+
+  MakeViewerActiveResponseBody body = 2;
+}
+
+message MakeViewerActiveResponseBody {
+}
+
+message ShowWindowRequest {
+  RequestHeader header = 1;
+
+  ShowWindowRequestBody body = 2;
+}
+
+message ShowWindowRequestBody {
+  string window_id = 1;
+}
+
+message ShowWindowResponse {
+  ResponseHeader header = 1;
+
+  ShowWindowResponseBody body = 2;
+}
+
+message ShowWindowResponseBody {
+}
+
+enum Stereoscopic {
+  Undef = 0;
+
+  Monoscopic = 1;
+
+  MonoLeft = 2;
+
+  MonoRight = 3;
+
+  MonoLeadingEye = 4;
+
+  HalfResX = 5;
+
+  HalfResY = 6;
+
+  Full = 7;
+}
+
+enum TrackType {
+  TRACKTYPE_PICTURE = 0;
+
+  TRACKTYPE_SOUND = 1;
+
+  TRACKTYPE_TIMECODE = 2;
+
+  TRACKTYPE_EDGECODE = 3;
+
+  TRACKTYPE_DATA = 4;
+}
+
+enum AudioTrackType {
+  UNSPECIFIED_TRACK_FORMAT = 0;
+
+  MONO_AUDIO_TRACK_FORMAT = 1;
+
+  STEREO_AUDIO_TRACK_FORMAT = 2;
+
+  AUDIO_5_1_TRACK_FORMAT = 3;
+
+  AUDIO_7_1_TRACK_FORMAT = 4;
+
+  WIDEST_AUDIO_TRACK_FORMAT = 5;
+}
+
+enum CommandErrorType {
+  NoError = 0;
+
+  OS_WritePermissions = 1;
+
+  OS_DirectoryPathNotFound = 2;
+
+  OS_FilePathLocation = 3;
+
+  OS_DuplicateName = 4;
+
+  OS_ReadError = 5;
+
+  OS_DiskSpace = 6;
+
+  OS_IllegalCharacters = 7;
+
+  OS_CharactersLimit = 8;
+
+  OS_FileNotFound = 9;
+
+  OS_TimeOut = 10;
+
+  OS_FileOpenFailed = 11;
+
+  OS_DirectoryCannotBeCreated = 12;
+
+  MC_BinNotOpened = 50;
+
+  MC_FileExists = 51;
+
+  MC_DownloadFailed = 52;
+
+  MC_MobNotFound = 53;
+
+  MC_BinColumnNotFound = 54;
+
+  MC_BinElementIsNotModifiable = 55;
+
+  MC_ProjectDataIdIsNotValid = 56;
+
+  MC_ProjectDatakeyIsNotValid = 57;
+
+  MC_AccessTokenIsNotValid = 58;
+
+  MC_EDLSettingsNotFound = 59;
+
+  MC_ExportSettingsNotFound = 60;
+
+  MC_ImportSettingsNotFound = 61;
+
+  MC_MissedParameter = 62;
+
+  MC_ImportFileFailed = 63;
+
+  MC_ExportFileFailed = 64;
+
+  MC_ShutDown = 65;
+
+  MC_InvalidArgument = 66;
+
+  MC_AddMarkerFailed = 67;
+
+  MC_ParseFileFailed = 68;
+
+  MC_BinNotFound = 69;
+
+  MC_InternalError = 70;
+
+  MC_ProjectNotOpen = 71;
+
+  MC_InvalidMobID = 72;
+
+  MC_MediaComposerIsBusy = 73;
+
+  MC_EDLComposeFailed = 74;
+
+  MC_EDLDecomposeFailed = 75;
+
+  MC_EDLNotSuportedFrameRate = 76;
+
+  MC_BinIsLocked = 77;
+
+  MC_LinkSettingsNotFound = 78;
+
+  MC_MarkerNotFound = 79;
+
+  MC_MarkerCollision = 80;
+
+  MC_WindowTypeInvalid = 81;
+
+  MC_NoActiveWindowFound = 82;
+
+  MC_WindowNotFound = 83;
+
+  MC_WindowHiddenOrClosed = 84;
+
+  MC_WindowClosed = 85;
+
+  MC_WindowVisible = 86;
+
+  MC_WindowHidden = 87;
+
+  MC_BinColumnNameAlreadyExist = 88;
+
+  MC_UnknownError = 1000;
+}
+
+enum TaskStatus {
+  Queued = 0;
+
+  Pending = 1;
+
+  InProgress = 2;
+
+  Completed = 3;
+
+  Failed = 4;
+
+  WaitingForUserInput = 5;
+}
+
+enum ExportFileOption {
+  Export_StopIf_MixedAudio = 0;
+
+  Export_StopIf_OfflineMedia = 1;
+
+  Export_StopIf_UnknownFX = 2;
+
+  Export_StopIf_LongGOP = 3;
+
+  Export_StopIf_NonNative = 4;
+
+  Export_StopIf_32kHzAudio = 5;
+
+  Export_OMF_Audio_To_WAVE = 6;
+
+  Export_OMF_Audio_To_AIFFC = 7;
+
+  Export_Conver_Audio_To_PCM = 8;
+
+  Export_StopIf_Color_Will_Not_Seen_In_Quick_Time_Reference = 9;
+
+  Export_StopIf_Cannot_Export_Mixed_Resolution_Sequence = 10;
+
+  Export_Keep_Partial_Render = 11;
+
+  Export_StopIf_Some_Audio_Clips_Do_Not_Match_Current_Hardware_Or_Software_Sample_Rate = 12;
+
+  Export_StopIf_Current_Master_Fader_Format_Cannot_Accomodate_Surround_Or_7_1_Surround_Tracks = 13;
+
+  Export_StopIf_Some_Clips_Dont_Have_High_Resolution_Video_Available = 14;
+}
+
+enum ImportFileOption {
+  Import_StopIf_Media_No_in_DB = 0;
+}
+
+enum MarkerColor {
+  Red = 0;
+
+  Green = 1;
+
+  Blue = 2;
+
+  Cyan = 3;
+
+  Magenta = 4;
+
+  Yellow = 5;
+
+  Black = 6;
+
+  White = 7;
+
+  NearWhite = 8;
+
+  Pink = 9;
+
+  Forest = 10;
+
+  Denim = 11;
+
+  Violet = 12;
+
+  Purple = 13;
+
+  Orange = 14;
+
+  Grey = 15;
+
+  Gold = 16;
+}
+
+enum ViewerType {
+  Source = 0;
+
+  Record = 1;
+
+  Popup = 2;
+
+  Center = 3;
+}
+

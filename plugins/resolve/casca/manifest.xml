@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BlackmagicDesign>
+    <Plugin>
+        <Id>com.ciclomedia.delapraca</Id>
+        <Name>De Lá Pra Cá</Name>
+        <Version>1.0.0</Version>
+        <Description>Trocar timelines entre Media Composer, Premiere e Resolve sem perdas</Description>
+        <FilePath>main.js</FilePath>
+    </Plugin>
+</BlackmagicDesign>
